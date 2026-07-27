@@ -1,0 +1,63 @@
+問題の配列
+String[] inputs = {
+    "tanaka@example.com",
+    "not-an-email",
+    "suzuki@mail.co.jp",
+    "12345",
+    "yamada@test.org"
+};
+
+
+コンソールに下記の出力
+tanaka@example.com
+suzuki@mail.co.jp
+yamada@test.org
+
+
+第2問
+
+問題の変数から電話番号を抜き取ってください
+String text = 
+"連絡先は090-1234-5678です。予備番号は080-9876-5432、固定電話は03-1234-5678です。";
+
+
+コンソールに下記の出力
+090-1234-5678
+080-9876-5432
+
+
+
+練習問題３
+1.現在の日時を yyyy年MM月dd日 HH:mm:ss 形式で表示する
+2.現在日時から 30日後 の日付を計算して表示する
+3."2000-01-15" という文字列を LocalDate に変換して表示する
+　//3問目の補足                          第1   第2省略可
+　LocalDate targetDate = LocalDate.parse("", format);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
