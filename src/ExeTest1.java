@@ -2,20 +2,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ExeTest1 {
 
 	public static void main(String[] args) throws Exception{
-
-		//　配列
-		String[] test = new String[5];
-
-		//　連想配列
-		Map<String, String> map = new HashMap<>();
-		map.put("test","1");
 
 		// Object型の宣言
 		//		
