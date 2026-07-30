@@ -39,10 +39,32 @@ String text =
 
 
 
+問題1: 単語の出現回数を数える
+
+与えられた文字列配列から、各単語が何回出現するかをHashMap<String, Integer>で数え、出現回数の多い順に表示するメソッドを作成してください。
+
+String[] words = {"apple", "banana", "apple", "orange", "banana", "apple"};
+// 期待する出力例:
+// apple: 3
+// banana: 2
+// orange: 1
+
+        //↑ポイント:
+//
+//        getOrDefaultを使うと、キーが存在しない場合のnullチェックを省略できる
+//        Map.Entryのリストを作ってsortすることで、値によるソートが可能になる（Mapは本来ソート不可）
 
 
 
+問題2: ArrayListから重複を除去しつつ順序を保持する
 
+ArrayList<Integer>から重複した要素を取り除き、最初に出現した順序を保ったまま新しいリストを返すメソッドを作成してください。
+（Setを使うだけだと順序が保証されないケースを考慮すること）
+
+
+java
+List<Integer> input = Arrays.asList(3, 1, 2, 3, 4, 1, 5);
+// 期待する出力: [3, 1, 2, 4, 5]
 
 
 

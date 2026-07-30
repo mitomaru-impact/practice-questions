@@ -1,12 +1,17 @@
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ExeTest1 {
 
 	public static void main(String[] args) throws Exception{
+
+		//　配列
+		String[] test = new String[5];
+
+		//　連想配列
+		Map<String, String> map = new HashMap<>();
+		map.put("test","1");
 
 		// Object型の宣言
 		//		
@@ -200,24 +205,152 @@ public class ExeTest1 {
 		//			System.out.println("現在は" + s + "です");
 		//		}catch(Exception e) {
 		//		}
-		// ① 現在の日時を指定フォーマットで表示
-		Date now = new Date();
-		SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		System.out.println("現在: " + f.format(now));
 
-		// ② 30日後の日付を計算
-		Calendar cal = Calendar.getInstance();
-		// 30日後を加算
-		cal.add(Calendar.DAY_OF_MONTH, 30);
-		Date date = cal.getTime();
-		System.out.println(date);
+		// 練習問題3
+		//		// ① 現在の日時を指定フォーマットで表示
+		//		Date now = new Date();
+		//		SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		//		System.out.println("現在: " + f.format(now));
+		//
+		//		// ② 30日後の日付を計算
+		//		Calendar cal = Calendar.getInstance();
+		//		// 30日後を加算
+		//		cal.add(Calendar.DAY_OF_MONTH, 30);
+		//		Date date = cal.getTime();
+		//		System.out.println(date);
+		//
+		//		// ③ 文字列 → LocalDate に変換
+		//		String dateStr = "2000-01-15";
+		//		LocalDate parsed = LocalDate.parse(dateStr);
+		//		System.out.println("変換後: " + parsed);
 
-		// ③ 文字列 → LocalDate に変換
-		String dateStr = "2000-01-15";
-		LocalDate parsed = LocalDate.parse(dateStr);
-		System.out.println("変換後: " + parsed);
+		//		//Instant
+		//		Instant i1 = Instant.now();
+		//		
+		// Instantとlong値との相互変換
+		//		Instant i2 = Instant.ofEpochMilli(1600705425827L);
+		//		long l = i2.toEpochMilli();
+		//		
+		//		//ZonedDateTimeの生成
+		//		ZonedDateTime z1 = ZonedDateTime.now();
+		//		ZonedDateTime z2 = ZonedDateTime.of(2023,1,2,3,4,5,6,ZoneId.of("Asia/Tokyo"));
+		//		
+		//		//InstantとZonedDateTimeとの相互変換
+		//		Instant i3 = z2.toInstant();
+		//		ZonedDateTime z3 = i3.atZone(ZoneId.of("Europe/London"));
+		//		
+		//		if(z2.isEqual(z3)) {
+		//			System.out.println("等しい");
+		//		}
+
+		//		//あいまいな日時を表すクラス
+		//		LocalDateTime l1 = LocalDateTime.now();
+		//		LocalDateTime l2 = LocalDateTime.of(2024, 1,1,9,5,0,0);
+		//		
+		//		//LocalDateTimeとZonedDateTimeの相互変換
+		//		ZonedDateTime z1 = l2.atZone(ZoneId.of("Europe/London"));
+		//		LocalDateTime l3 = z1.toLocalDateTime();
+		//		
+		//
+		//		System.out.println(ZoneId.of("Europe/London"));
+		//		System.out.println(ZoneId.of("Asia/Tokyo"));
+
+		//		//1000日後を計算する
+		//		LocalDate ld1 = LocalDate.now();
+		//		LocalDate ld2 = ld1.plusDays(1000);
+		//		String s = ld2.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		//		System.out.println(s);
+
+		//		//Periodクラスの利用
+		//		LocalDate d1 = LocalDate.of(2023, 1, 1);
+		//		LocalDate d2 = LocalDate.of(2023, 1, 4);
+		//		
+		//		Period p1 = Period.ofDays(3);
+		//		Period p2 = Period.between(d1, d2);
+		//		
+		//		LocalDate d3 = d2.plus(p2);
+
+		//		//ArrayListについて
+		//		ArrayList<Integer> points = new ArrayList<Integer>();
+		//		points.add(10);
+		//		points.add(20);
+		//		points.add(30);
+		//		
+		//		for (int i : points) {
+		//			System.out.println(i);
+		//		}
 
 
+		//Setについて
+		//		Set<String> colors = new TreeSet<String>();
+		//		colors.add("アカ");
+		//		colors.add("アオ");
+		//		colors.add("キイ");
+		//		
+		//		for(String s : colors) {
+		//			System.out.println(s + "→");
+		//		}
+		//
+		//		Map<String, Integer> prefs = new HashMap<String,Integer>();
+		//		prefs.put("東京", 1261);
+		//		prefs.put("京都", 255);
+		//		prefs.put("熊本", 182);
+		//		for(String key : prefs.keySet()) {
+		//			int value = prefs.get(key);
+		//			System.out.println(key + "の人口は" + value);
+		//		}
+
+		//練習問題１
+		//		String[] words = {"apple", "banana", "apple", "orange", "banana", "apple"};
+		//		Map<String, Integer> countMap = new HashMap<>();
+		//
+		//        for (String word : words) {
+		//            countMap.put(word, countMap.getOrDefault(word, 0) + 1);
+		//        }
+		//        // sort1 TreeMap仕様
+		//        Map<String, Integer> sortedMap = new TreeMap<>(Comparator.naturalOrder());
+		//        sortedMap.putAll(countMap);
+		//        
+		//        for (Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
+		//            System.out.println(entry.getKey() + ": " + entry.getValue());
+		//        }
+		//
+		//        // sort2 出現回数の多い順にソートするため、entrySetをListに変換
+		//        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(countMap.entrySet());
+		//        entryList.sort((a, b) -> b.getValue() - a.getValue());
+		//
+		//
+		//        for (Map.Entry<String, Integer> entry : entryList) {
+		//            System.out.println(entry.getKey() + ": " + entry.getValue());
+		//        }
+		//
+		//↑ポイント:
+		//
+		//        getOrDefaultを使うと、キーが存在しない場合のnullチェックを省略できる
+		//        Map.Entryのリストを作ってsortすることで、値によるソートが可能になる（Mapは本来ソート不可）
+
+		//練習問題２
+		//		List<Integer> input = Arrays.asList(3, 1, 2, 3, 4, 1, 5);
+		//		
+		//		//回答１
+		//		List<Integer> result = new ArrayList<>();
+		//        Set<Integer> seen = new HashSet<>();
+		//
+		//        for (Integer num : input) {
+		//            if (!seen.contains(num)) {
+		//                seen.add(num);
+		//                result.add(num);
+		//            }
+		//        }
+		//		System.out.println(result);
+		//		
+		//		//回答２
+		//		System.out.println(new ArrayList<>(new LinkedHashSet<>(input)));
+		//
+		//		ポイント:
+		//
+		//			HashSetは順序を保証しないが、LinkedHashSetは挿入順を保持するのでこのケースに最適
+		//			1問目の解と組み合わせて「Setで重複チェック＋Listで順序保持」というパターンは頻出
 		System.out.println("End");
 	}
 }
