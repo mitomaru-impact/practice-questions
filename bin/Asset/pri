@@ -70,6 +70,86 @@ List<Integer> input = Arrays.asList(3, 1, 2, 3, 4, 1, 5);
 
 
 
+## 問題1：基本の try-catch-finally
+
+### 課題
+2つの整数を受け取り割り算を行うメソッド `divide(int a, int b)` を作成してください。
+`b` が 0 の場合は `ArithmeticException` が発生しますが、これを適切に処理し、
+プログラムを異常終了させないようにしてください。
+
+### 要件
+- 例外が発生した場合は `"0で割ることはできません"` とコンソールに出力する
+- 正常時・異常時にかかわらず、必ず `"処理を終了します"` と出力する（`finally` を使う）
+- 例外が発生した場合は `-1` を、正常な場合は計算結果を返す
+
+
+
+
+
+## 問題2：複数の catch とマルチキャッチ
+
+### 課題
+文字列の配列 `String[] data` から指定インデックスの要素を取り出し、
+整数に変換して返すメソッド `parseValue(String[] data, int index)` を作成してください。
+このメソッドでは以下の2種類の例外が発生する可能性があります。
+
+- 存在しないインデックスを指定した場合 → `ArrayIndexOutOfBoundsException`
+- 数値に変換できない文字列だった場合 → `NumberFormatException`
+
+### 要件
+- 上記2つの例外をそれぞれ区別してメッセージを出し分ける方法（複数 catch）と、
+  まとめて1つのメッセージにする方法（マルチキャッチ）の**両方**を実装する
+- どちらの例外が発生しても、プログラムは異常終了しないこと
+
+下記二つのメソッドを実装
+parseValueDetailed()
+parseValueSimple()
+
+
+コンソールの出力例
+数値に変換できません: abc
+指定したインデックスは存在しません: 5
+入力データが不正です: For input string: "abc"
+入力データが不正です: Index 5 out of bounds for length 3
+End
+
+
+
+
+
+## 問題3：独自例外クラスの作成とバリデーション
+
+### 課題
+銀行口座クラス `BankAccount` を作成し、`withdraw(int amount)` メソッドで
+残高より多い金額を引き出そうとした場合に、独自の例外
+`InsufficientBalanceException` をスローするようにしてください。
+
+### 要件
+- `InsufficientBalanceException` は `Exception` を継承したチェック例外とする
+- コンストラクタでエラーメッセージを受け取れるようにする
+- `withdraw` メソッドは `throws` 宣言で例外を呼び出し元に伝える　throw new InsufficientBalanceException
+- `main` メソッド側で `try-catch` を使い、例外発生時にメッセージを表示する
+
+
+
+独自例外クラス
+InsufficientBalanceException
+
+銀行口座クラス
+BankAccount
+
+起動クラス
+Mainメソッド
+
+
+
+
+
+
+
+
+
+
 
 
 

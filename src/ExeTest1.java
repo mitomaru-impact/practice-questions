@@ -1,17 +1,20 @@
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class ExeTest1 {
+	
+	public static void main(String[] args) throws IOException {
 
-	public static void main(String[] args) throws Exception{
-
+		
 		//　配列
 		String[] test = new String[5];
-
 		//　連想配列
 		Map<String, String> map = new HashMap<>();
 		map.put("test","1");
+
+
 
 		// Object型の宣言
 		//		
@@ -347,11 +350,92 @@ public class ExeTest1 {
 		//		//回答２
 		//		System.out.println(new ArrayList<>(new LinkedHashSet<>(input)));
 		//
-		//		ポイント:
+		//		↑ポイント:
 		//
 		//			HashSetは順序を保証しないが、LinkedHashSetは挿入順を保持するのでこのケースに最適
 		//			1問目の解と組み合わせて「Setで重複チェック＋Listで順序保持」というパターンは頻出
+
+		//エラー処理の例
+		//		FileWriter fw = new FileWriter("test.txt");
+		//		try {
+		//			fw.write("test");
+		//		}catch(IOException e ) {
+		//			System.out.println("エラーが発生");
+		//		}finally {
+		//			fw.close();
+		//		}
+
+		//例外処理の練習問題１
+		// System.out.println(divide(10, 2));  // 5
+		// System.out.println(divide(10, 0));  // -1
+
+		//例外処理の練習問題2
+		//		String[] data = {"10", "abc", "30"};
+		//
+		//		parseValueDetailed(data, 1); // NumberFormatException
+		//		parseValueDetailed(data, 5); // ArrayIndexOutOfBoundsException
+		//
+		//		parseValueSimple(data, 1);
+		//		parseValueSimple(data, 5);
+		
+		//例外処理の練習問題3
+//		BankAccount ba = new BankAccount(1000);
+//		try {
+//			ba.withdraw(500);
+//			ba.withdraw(800);
+//		}catch(InsufficientBalanceException e ) {
+//			System.out.println("エラー : " + e.getMessage());
+//		}
+		
+		//練習問題4
+//		try (FileConnection conn = new FileConnection("sample.txt")) {
+//            conn.read();
+//        } catch (RuntimeException e) {
+//            System.out.println("エラー処理: " + e.getMessage());
+//        }
+//        System.out.println("プログラムは正常に継続しています");
+//
+		// ログ出力
+//		LogWriterNew log = new LogWriterNew();
+//		log.write("このような正解");
+		
 		System.out.println("End");
+	}
+	
+	
+	// 2-A: 複数のcatchブロックで個別に処理
+	public static Integer parseValueDetailed(String[] data, int index) {
+		try {
+			return Integer.parseInt(data[index]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("指定したインデックスは存在しません: " + index);
+		} catch (NumberFormatException e) {
+			System.out.println("数値に変換できません: " + data[index]);
+		}
+		return null;
+	}
+	// 2-B: マルチキャッチでまとめて処理
+	public static Integer parseValueSimple(String[] data, int index) {
+		try {
+			return Integer.parseInt(data[index]);
+		} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+			System.out.println("入力データが不正です: " + e.getMessage());
+		}
+		return null;
+	}
+
+	//例外処理の練習問題１
+	public static int divide(int a, int b) {
+		int result;
+		try {
+			result = a / b;
+		} catch (ArithmeticException e) {
+			System.out.println("0で割ることはできません");
+			result = -1;
+		} finally {
+			System.out.println("処理を終了します");
+		}
+		return result;
 	}
 }
 
