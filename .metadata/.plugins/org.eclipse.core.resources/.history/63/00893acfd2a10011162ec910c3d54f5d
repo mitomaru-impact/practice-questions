@@ -1,0 +1,303 @@
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class game {
+
+    static class Card {
+        String name;
+        int rarity;
+        int attack;
+
+        Card(String name, int rarity, int attack) {
+            this.name = name;
+            this.rarity = rarity;
+            this.attack = attack;
+        }
+
+        String getStars() {
+            StringBuilder stars = new StringBuilder();
+
+            for (int i = 0; i < rarity; i++) {
+                stars.append("★");
+            }
+
+            return stars.toString();
+        }
+
+        void show() {
+            System.out.println("----------------------------");
+            System.out.println("カード：" + name);
+            System.out.println("レア度：" + getStars());
+            System.out.println("攻撃力：" + attack);
+            System.out.println("----------------------------");
+        }
+    }
+
+    static ArrayList<Card> cards = new ArrayList<>();
+    static ArrayList<Card> collection = new ArrayList<>();
+
+    static Random random = new Random();
+    static Scanner scanner = new Scanner(System.in);
+
+    static int coins = 1000;
+    static final int GACHA_COST = 100;
+
+    public static void main(String[] args) {
+
+        createCards();
+
+        System.out.println("================================");
+        System.out.println("       ★ CARD GACHA GAME ★");
+        System.out.println("================================");
+
+        System.out.println("1000コインでゲームスタート！");
+        System.out.println();
+
+        while (true) {
+
+            System.out.println("================================");
+            System.out.println("現在のコイン：" + coins);
+            System.out.println("集めたカード：" + collection.size() + "種類");
+            System.out.println("================================");
+
+            System.out.println("1. ガチャを引く（100コイン）");
+            System.out.println("2. 10連ガチャ（1000コイン）");
+            System.out.println("3. カード図鑑を見る");
+            System.out.println("4. ゲームを終了する");
+            System.out.println("================================");
+
+            System.out.print("番号を入力してください：");
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+
+            case "1":
+                gacha();
+                break;
+
+            case "2":
+                tenGacha();
+                break;
+
+            case "3":
+                showCollection();
+                break;
+
+            case "4":
+                System.out.println();
+                System.out.println("ゲームを終了します。");
+                System.out.println("遊んでくれてありがとう！");
+                scanner.close();
+                return;
+
+            default:
+                System.out.println("正しい番号を入力してください。");
+            }
+        }
+    }
+
+    static void createCards() {
+
+        cards.add(new Card("スライム", 1, 10));
+        cards.add(new Card("ゴブリン", 1, 15));
+        cards.add(new Card("コウモリ", 1, 12));
+        cards.add(new Card("小さな妖精", 1, 18));
+
+        cards.add(new Card("オオカミ", 2, 30));
+        cards.add(new Card("オーク", 2, 40));
+        cards.add(new Card("魔法使い", 2, 45));
+        cards.add(new Card("騎士", 2, 50));
+
+        cards.add(new Card("炎の魔導士", 3, 80));
+        cards.add(new Card("ドラゴンナイト", 3, 100));
+        cards.add(new Card("暗黒騎士", 3, 110));
+
+        cards.add(new Card("古代ドラゴン", 4, 200));
+        cards.add(new Card("聖騎士", 4, 220));
+
+        cards.add(new Card("伝説の勇者", 5, 500));
+        cards.add(new Card("神龍", 5, 1000));
+    }
+
+    static void gacha() {
+
+        if (coins < GACHA_COST) {
+            System.out.println();
+            System.out.println("コインが足りません！");
+            System.out.println();
+            return;
+        }
+
+        coins -= GACHA_COST;
+
+        System.out.println();
+        System.out.println("ガチャを回しています...");
+        waitTime();
+
+        Card card = getRandomCard();
+
+        System.out.println();
+        System.out.println("★★★★★★★★★★★★★★★★");
+        System.out.println("        ガチャ結果！");
+        System.out.println("★★★★★★★★★★★★★★★★");
+
+        card.show();
+
+        checkNewCard(card);
+
+        System.out.println("残りコイン：" + coins);
+        System.out.println();
+    }
+
+    static void tenGacha() {
+
+        if (coins < 1000) {
+            System.out.println();
+            System.out.println("10連ガチャには1000コイン必要です！");
+            System.out.println("現在のコイン：" + coins);
+            System.out.println();
+            return;
+        }
+
+        coins -= 1000;
+
+        System.out.println();
+        System.out.println("================================");
+        System.out.println("          ★ 10連ガチャ ★");
+        System.out.println("================================");
+
+        waitTime();
+
+        for (int i = 0; i < 10; i++) {
+
+            Card card = getRandomCard();
+
+            System.out.println();
+            System.out.println((i + 1) + "枚目");
+            card.show();
+
+            checkNewCard(card);
+        }
+
+        System.out.println();
+        System.out.println("10連ガチャ終了！");
+        System.out.println("残りコイン：" + coins);
+        System.out.println();
+    }
+
+    static Card getRandomCard() {
+
+        int number = random.nextInt(100);
+
+        int targetRarity;
+
+        if (number < 70) {
+            targetRarity = 1;
+
+        } else if (number < 90) {
+            targetRarity = 2;
+
+        } else if (number < 97) {
+            targetRarity = 3;
+
+        } else if (number < 99) {
+            targetRarity = 4;
+
+        } else {
+            targetRarity = 5;
+        }
+
+        ArrayList<Card> rarityCards = new ArrayList<>();
+
+        for (Card card : cards) {
+
+            if (card.rarity == targetRarity) {
+                rarityCards.add(card);
+            }
+        }
+
+        int index = random.nextInt(rarityCards.size());
+
+        return rarityCards.get(index);
+    }
+
+    static void checkNewCard(Card card) {
+
+        boolean alreadyHave = false;
+
+        for (Card ownedCard : collection) {
+
+            if (ownedCard.name.equals(card.name)) {
+                alreadyHave = true;
+                break;
+            }
+        }
+
+        if (!alreadyHave) {
+
+            collection.add(card);
+
+            System.out.println("★★ NEW CARD！ ★★");
+            System.out.println("「" + card.name + "」を図鑑に登録しました！");
+
+        } else {
+
+            System.out.println("このカードはすでに持っています。");
+        }
+    }
+
+    static void showCollection() {
+
+        System.out.println();
+        System.out.println("================================");
+        System.out.println("          ★ カード図鑑 ★");
+        System.out.println("================================");
+
+        if (collection.size() == 0) {
+
+            System.out.println("まだカードを持っていません。");
+            System.out.println("ガチャを引いてカードを集めよう！");
+            System.out.println();
+            return;
+        }
+
+        for (int i = 0; i < collection.size(); i++) {
+
+            Card card = collection.get(i);
+
+            System.out.println();
+            System.out.println((i + 1) + "．" + card.name
+                    + "  " + card.getStars()
+                    + "  攻撃力：" + card.attack);
+        }
+
+        System.out.println();
+        System.out.println("現在 " + collection.size()
+                + " / " + cards.size() + "種類");
+
+        if (collection.size() == cards.size()) {
+
+            System.out.println();
+            System.out.println("★★★★★★★★★★★★★★★★");
+            System.out.println("     コンプリート達成！");
+            System.out.println("     おめでとうございます！");
+            System.out.println("★★★★★★★★★★★★★★★★");
+        }
+
+        System.out.println();
+    }
+
+    static void waitTime() {
+
+        try {
+
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+        }
+    }
+}
